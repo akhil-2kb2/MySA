@@ -1,27 +1,31 @@
 package com.example.mysa
 
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.safeDrawingPadding
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
-import androidx.navigation3.runtime.entryProvider
-import androidx.navigation3.runtime.rememberNavBackStack
-import androidx.navigation3.ui.NavDisplay
-import com.example.mysa.ui.main.MainScreen
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
+import com.example.mysa.ui.CallAssistScreen
+import com.example.mysa.ui.CalendarScreen
+import com.example.mysa.ui.LiveScreen
+import com.example.mysa.ui.MainScaffold
+import com.example.mysa.ui.MoreScreen
+import com.example.mysa.ui.main.DashboardScreen
 
 @Composable
 fun MainNavigation() {
-  val backStack = rememberNavBackStack(Main)
+    var currentRoute by remember { mutableStateOf("dashboard") }
 
-  NavDisplay(
-    backStack = backStack,
-    onBack = { backStack.removeLastOrNull() },
-    entryProvider =
-      entryProvider {
-        entry<Main> {
-          MainScreen(onItemClick = { navKey -> backStack.add(navKey) }, modifier = Modifier.safeDrawingPadding().padding(16.dp))
+    MainScaffold(
+        currentRoute = currentRoute,
+        onNavigate = { currentRoute = it }
+    ) { _ ->
+        when (currentRoute) {
+            "dashboard" -> DashboardScreen()
+            "call_assist" -> CallAssistScreen()
+            "live" -> LiveScreen()
+            "calendar" -> CalendarScreen()
+            "more" -> MoreScreen()
         }
-      },
-  )
+    }
 }

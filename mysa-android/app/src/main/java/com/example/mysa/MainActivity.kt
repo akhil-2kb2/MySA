@@ -9,7 +9,6 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.ui.Modifier
 import com.example.mysa.theme.MySATheme
-import com.example.mysa.ui.ChatScreen
 
 class MainActivity : ComponentActivity() {
   override fun onCreate(savedInstanceState: Bundle?) {
@@ -17,7 +16,11 @@ class MainActivity : ComponentActivity() {
 
     enableEdgeToEdge()
     setContent {
-      MySATheme { Surface(modifier = Modifier.fillMaxSize(), color = MaterialTheme.colorScheme.background) { ChatScreen() } }
+      MySATheme { 
+        Surface(modifier = Modifier.fillMaxSize(), color = MaterialTheme.colorScheme.background) { 
+            MainNavigation() 
+        } 
+      }
     }
   }
 }
