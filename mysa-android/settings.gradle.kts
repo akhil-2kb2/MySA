@@ -31,3 +31,4 @@ plugins {
 
 rootProject.name = "MySA"
 include(":app")
+include(":app")
